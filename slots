@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<time.h>
+#define SLOT 3
+int main (void){
+	int coins=100, bet=0,i,j,a=0,b=0,slot[SLOT][SLOT];
+	printf("This is a Slot machine made by Tifus15 v1.1 \n\n\n\n");
+	printf("Winings: 777 x100\n         666 x75\n         555 x50\n         444 x25\n         333 x15\n         222 x5\n         111 x2\n");
+	while(coins>=0){
+		printf("\ncoins: %d\n",coins);
+		printf("\nType your bet: ");
+		while(bet<=0 || bet>coins){
+			scanf("%d",&bet);
+		}
+		coins=coins-bet;
+		srand((unsigned)  time(NULL));
+		for(i=0;i<SLOT;++i){
+			for(j=0;j<SLOT;++j){
+				if(a>=3){
+					slot[j][i]=rand()%6+1;
+					if(slot[j][i]==6)++b;
+				}
+				if(b>=3){
+					slot[j][i]=rand()%5+1;
+				}
+				if(a<3 && b<3){
+					slot[j][i]=rand()%7+1;
+					if(slot[j][i]==7)++a;
+					if(slot[j][i]==6)++b;
+				}
+			}
+		}
+
+
+
+		for(i=0;i<SLOT;++i){
+			printf("\n");
+			for(j=0;j<SLOT;++j){
+				printf("%d   ",slot[i][j]);
+			}
+		}
+
+
+
+
+		if(slot[1][0]==slot[1][1] && slot[1][0]==slot[1][2]){
+			if(slot[1][0]==7){
+				bet=bet*100;
+			}
+		    if(slot[1][0]==6){
+				bet=bet*75;
+			}
+			if(slot[1][0]==5){
+				bet=bet*50;
+			}
+			if(slot[1][0]==4){
+				bet=bet*25;
+			}
+			if(slot[1][0]==3){
+				bet=bet*15;
+			}
+			if(slot[1][0]==2){
+				bet=bet*5;
+			}
+			if(slot[1][0]==1){
+				bet=bet*2;
+			}
+		}
+	    else{
+			bet=bet*0;
+		}
+		printf("You have earn %d\n",bet);
+		coins=coins+bet;
+		bet=0;
+	}
+	return 0;
+}
+
