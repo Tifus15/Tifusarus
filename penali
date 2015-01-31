@@ -5,7 +5,7 @@ int main (void){
 	int a,i,j, golovi[2]={0};
 	printf("      Penali   by Tifus15\n");
 	printf("          -------------------------------------------\n");
-	printf("          |                                         |\n          |   1               2             3       |\n          |                                         |\n          |       4           5            6        |\n          |                                         |\n");
+	printf("          |                                         |\n          |   1               2             3       |\n          |                                         |\n          |   4               5             6       |\n          |                                         |\n");
 	printf("Odaberite u koje polje cete pucati, poslije ide faza obrane,\n igra se na 5 udaraca na gol, pobjeduje onaj sa vise golova"); 
 	srand((unsigned)time(NULL));    
 	for(i=0;i<IGRA;++i){
@@ -40,15 +40,40 @@ int main (void){
 			}
 		}
 	}
+	if(golovi[0]==golovi[1]){
+		printf("\nIzjednaceno %d : %d\n",golovi[0],golovi[1]);
+		printf("dodatna runda:\n");
+		while(golovi[0]==golovi[1]){
+			printf("Faza napada: ");
+			do{
+				scanf("%d",&a);
+			}while(a<1||a>6);
+			if(a==rand() % 6 + 1){
+					printf("\nGolman je obranio");
+				}
+				else{
+					printf("\nZabili ste gol");
+					++golovi[0];
+				}
+				printf("Faza obrane: ");
+				do{
+				scanf("%d",&a);
+			}while(a<1||a>6);
+			if(a==rand() % 6 + 1){
+					printf("\nObranili ste");
+				}
+				else{
+					printf("\nDobili ste gol");
+					++golovi[1];
+				}
+		}
+	}
 	if(golovi[0]>golovi[1]){
 	
 		printf("\nPobjedili ste rezultatom %d : %d",golovi[0],golovi[1]);
 	}
 	if(golovi[0]<golovi[1]){
 		printf("\nIzgubili ste rezultatom %d : %d",golovi[0],golovi[1]);
-	}
-	if(golovi[0]==golovi[1]){
-		printf("\nIzjednaceno je %d : %d",golovi[0],golovi[1]);
-	}
+}
 	return 0;
 }
